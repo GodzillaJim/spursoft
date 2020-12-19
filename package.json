@@ -6,12 +6,13 @@
   "name": "spursoftshop",
   "version": "1.0.0",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "author": "GodzillaJim <jimnanjoroge76@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8"
   },
   "scripts": {
     "start": "node backend/server",
