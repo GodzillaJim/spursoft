@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  },
+  "name": "spursoftshop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "GodzillaJim <jimnanjoroge76@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server"
+  }
+}
