@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 const Header = () => {
     return (
         <header>
-            <Navbar bg="dark" variant ='dark' collapseOneSelect expand="lg">
+            <Navbar bg="dark" variant ='dark' collapseOnSelect expand="lg">
   <Container>
   <LinkContainer to='/'>
     <Navbar.Brand>SpurSoft</Navbar.Brand>

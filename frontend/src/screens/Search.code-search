@@ -1,0 +1,9 @@
+# Query: collapseOn
+# ContextLines: 1
+
+1 result - 1 file
+
+frontend/src/components/Header.js:
+  7          <header>
+  8:             <Navbar bg="dark" variant ='dark' collapseOnSelect expand="lg">
+  9    <Container>
