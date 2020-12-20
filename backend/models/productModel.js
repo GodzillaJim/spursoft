@@ -1,4 +1,3 @@
-import { truncateSync } from 'fs'
 import mongoose from 'mongoose'
 
 const reviewSchema = mongoose.Schema({
@@ -69,5 +68,5 @@ const productSchema = mongoose.Schema({
     timestamps: true,
 })
 
-const Product = mongoose.model('User', productSchema)
+const Product = mongoose.model('Product', productSchema)
 export default Product
