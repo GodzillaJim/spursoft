@@ -55,7 +55,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     })
   } catch (error) {
     dispatch({
-      type: ORDER_CREATE_FAIL,
+      type: ORDER_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
