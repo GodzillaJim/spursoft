@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import CheckoutSteps from '../components/CheckoutSteps.js';
+import { createOrder } from '../actions/orderActions.js';
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({ history }) => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   // Calculating prices
   const addDecimals = (num) => (Math.round(num * 100) / 100).toFixed(2);
@@ -13,8 +15,30 @@ const PlaceOrderScreen = () => {
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
   cart.taxPrice = addDecimals(Number(0.16 * cart.itemsPrice).toFixed(2));
-  cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.taxPrice)).toFixed(2)
-  const placeOrderHandler = () => '';
+  cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.taxPrice)).toFixed(
+    2
+  );
+  const orderCreate = useSelector( state => state.orderCreate)
+  const { order, success, error } = orderCreate
+  
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`)
+    }
+  })
+
+  const placeOrderHandler = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress.shippingEmail,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
+  };
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 />
@@ -88,12 +112,17 @@ const PlaceOrderScreen = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
+                {error && <Message variant='danger'>{error}</Message>}
+              </ListGroup.Item>
+              <ListGroup.Item>
                 <Button
                   type='button'
                   className='btn btn-block btn-dark'
                   disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
-                >Make Purchase</Button>
+                >
+                  Make Purchase
+                </Button>
               </ListGroup.Item>
             </ListGroup>
           </Card>
