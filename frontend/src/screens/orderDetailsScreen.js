@@ -46,7 +46,7 @@ const OrderDetailsScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, orderId, order, successPay, history]);
+  }, [dispatch, orderId, order, successPay, history, orderDetails]);
 
   return loading ? (
     <Loader />
