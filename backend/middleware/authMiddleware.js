@@ -22,6 +22,14 @@ const protect = asyncHandler(async (req, res, next) => {
         throw new Error('Token not found')
     }
 })
+const admin = ( req, res, next ) => {
+    if (req.user && req.user.isAdmin) {
+        next()
+    } else {
+        res.statsu(401)
+        throw new Error('Not authorized as an admin')
+    }
+}
 export {
-    protect
+    protect, admin
 }
