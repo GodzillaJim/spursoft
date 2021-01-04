@@ -22,7 +22,7 @@ import {
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
 } from '../constants/userConstants.js';
-import { ORDER_LIST_MY_RESET, ORDER_DETAILS_RESET } from '../constants/orderConstants.js';
+import { ORDER_LIST_MY_RESET } from '../constants/orderConstants.js';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -190,7 +190,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     })
     const { userLogin : { userInfo }} = getState()
     const config = { headers: {Authorization: `Bearer ${userInfo.token}`}}
-    const { data } = await axios.delete(`/api/users/${id}`, config)
+    await axios.delete(`/api/users/${id}`, config)
     dispatch({
       type: USER_DELETE_SUCCESS
     })

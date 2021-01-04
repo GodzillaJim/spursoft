@@ -40,7 +40,7 @@ const Header = () => {
                 <LinkContainer to='/login'>
                   <Nav.Link>
                     <i className='fas fa-user' style={{paddingRight: '2px'}}></i>
-                    SIGN
+                    SIGN IN
                   </Nav.Link>
                 </LinkContainer>
               )}
@@ -57,7 +57,6 @@ const Header = () => {
                   </LinkContainer>
                 </NavDropdown>
               )}
-          
             </Nav>
           </Navbar.Collapse>
         </Container>
