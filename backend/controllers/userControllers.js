@@ -128,13 +128,14 @@ const getUserById = asyncHandler(async (req, res) => {
 
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
+
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.isAdmin = req.body.isAdmin;
-    const updateUser = await user.save();
+    const updatedUser = await user.save();
     res.json({
-      _id: updateUser._id,
+      _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
