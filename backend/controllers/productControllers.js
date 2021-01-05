@@ -1,7 +1,5 @@
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
-import { Image } from 'react-bootstrap';
-
 // @desc Fetch all products
 // @route GET /api/products
 // @access public
@@ -67,7 +65,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     brand,
     category,
     countInStock,
-  } = req.body;
+  } = req.body
   const product = await Product.findById(req.params.id);
   if (product) {
     product.name = name;

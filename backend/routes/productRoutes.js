@@ -6,7 +6,7 @@ import {
   createProduct,
   updateProduct,
 } from '../controllers/productControllers.js';
-import {} from '../middleware/authMiddleware.js';
+import {protect, admin} from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 // @desc Fetch all products
