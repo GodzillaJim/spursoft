@@ -5,6 +5,7 @@ import {
   deleteProduct,
   createProduct,
   updateProduct,
+  createProductReview
 } from '../controllers/productControllers.js';
 import {protect, admin} from '../middleware/authMiddleware.js';
 const router = express.Router();
@@ -22,5 +23,5 @@ router
   .get(getProductsById)
   .delete(protect, admin, deleteProduct)
   .put(protect, admin, updateProduct);
-
+router.route('/:id/reviews').post(protect, createProductReview)
 export default router;

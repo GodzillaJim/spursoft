@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
 import {} from '../actions/userActions.js';
-import {
-  listOrders
-} from '../actions/orderActions.js';
+import { listOrders } from '../actions/orderActions.js';
 
 const OrderListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -17,11 +15,11 @@ const OrderListScreen = ({ history, match }) => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-      if (userInfo && userInfo.isAdmin) {
-        dispatch(listOrders())
-      } else {
-          history.push('/login')
-      }
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listOrders());
+    } else {
+      history.push('/login');
+    }
   }, [dispatch, history, userInfo]);
   return (
     <>
@@ -50,24 +48,26 @@ const OrderListScreen = ({ history, match }) => {
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                  <td>{order._id}</td>
+                <td>{order._id}</td>
                 <td>${order.user.name}</td>
                 <td className='text-center'>
-                  {order.createdAt.substring(0,10)}
+                  {order.createdAt.substring(0, 10)}
                 </td>
+                <td className='text-center'>{order.totalPrice}</td>
                 <td className='text-center'>
-                  {order.totalPrice}
-                </td>
-                <td className='text-center'>{order.isPaid ? (
-                    order.paidAt.substring(0,10)
+                  {order.isPaid ? (
+                    order.paidAt.substring(0, 10)
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
-                  )}</td>
-                <td className='text-center'>{order.isDelivered ? (
+                  )}
+                </td>
+                <td className='text-center'>
+                  {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
-                  )}</td>
+                  )}
+                </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}/edit`}>
                     <Button variant='light' className='btn btn-sm'>
