@@ -24,6 +24,9 @@ const ProductEditScreen = ({ match, history }) => {
   const [description, setDescription] = useState('');
   const [uploading, setUploading] = useState(false);
   const [errorUploading, setErrorUploading] = useState(null);
+  const [productFile, setProductFile] = useState('');
+  const [uploadingProduct, setUploadingProduct] = useState(false);
+  const [errorUploadingProduct, setErrorUploadingProduct] = useState(false);
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -51,6 +54,7 @@ const ProductEditScreen = ({ match, history }) => {
         setCategory(product.category);
         setCountInStock(product.countInStock);
         setDescription(product.description);
+        setProductFile(product.file);
       }
     }
   }, [
@@ -61,6 +65,7 @@ const ProductEditScreen = ({ match, history }) => {
     product.category,
     product.countInStock,
     product.description,
+    product.file,
     product.image,
     product.name,
     product.price,
@@ -84,9 +89,29 @@ const ProductEditScreen = ({ match, history }) => {
       setErrorUploading(null);
       setUploading(false);
     } catch (error) {
-      console.log(error);
       setUploading(false);
       setErrorUploading(error.message);
+    }
+  };
+  const uploadProductFileHandler = async (e) => {
+    const productFile = e.target.files[0];
+    const formData = new FormData();
+    formData.append('product', productFile);
+    setUploadingProduct(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+      const { data } = await axios.post('/api/upload/file', formData, config);
+      setProductFile(data);
+      setErrorUploadingProduct(false);
+      setUploadingProduct(false);
+    } catch (error) {
+      setUploadingProduct(false);
+      setErrorUploadingProduct(error.message);
     }
   };
   const submitHandler = (e) => {
@@ -101,6 +126,7 @@ const ProductEditScreen = ({ match, history }) => {
         category,
         description,
         countInStock,
+        file: productFile,
       })
     );
   };
@@ -156,6 +182,25 @@ const ProductEditScreen = ({ match, history }) => {
                 {uploading && <Loader />}
                 {errorUploading && (
                   <Message variant='danger'>{errorUploading}</Message>
+                )}
+              </Form.Group>
+              <Form.Group controlId='file'>
+                <Form.Label>Product</Form.Label>
+                <Form.Control
+                  type='text'
+                  onChange={(e) => setProductFile(e.target.value)}
+                  placeholder={'Enter product file url'}
+                  value={productFile}
+                />
+                <Form.File
+                  id='product-file'
+                  label='Choose File'
+                  custom
+                  onChange={uploadProductFileHandler}
+                />
+                {uploadingProduct && <Loader />}
+                {errorUploadingProduct && (
+                  <Message variant='danger'>{errorUploadingProduct}</Message>
                 )}
               </Form.Group>
               <Form.Group controlId='brand'>

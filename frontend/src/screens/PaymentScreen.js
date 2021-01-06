@@ -3,6 +3,7 @@ import { Form, Button, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer.js';
 import CheckoutSteps from '../components/CheckoutSteps.js';
+import Meta from '../components/Meta.js'
 import { savePaymentMethod } from '../actions/cartActions.js';
 
 const PaymentScreen = ({ history }) => {
@@ -23,6 +24,7 @@ const PaymentScreen = ({ history }) => {
   };
   return (
     <FormContainer>
+      <Meta title='SpurSoft|Pay'/>
       <CheckoutSteps step1 step2 step3 />
       <h1>Payment Method</h1>
       <Form onSubmit={submitHandler}>

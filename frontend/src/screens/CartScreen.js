@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 
 import Message from '../components/Message';
+import Meta from '../components/Meta.js'
 import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = ({ match, location, history }) => {
@@ -35,6 +36,7 @@ const CartScreen = ({ match, location, history }) => {
     <Row>
       <Col md={8}>
         <h1>SHOPPING CART</h1>
+        <Meta title='SpurSoft | Cart'/>
         {cartItems.length === 0 ? (
           <Message variant='dark'>
             Your cart is empty. <Link to='/'>Find Software</Link>

@@ -4,6 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
+import Meta from '../components/Meta.js'
 import {} from '../actions/userActions.js';
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions';
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants.js'
@@ -60,6 +61,7 @@ const ProductListScreen = ({ history, match }) => {
   }, [dispatch, pageNumber, history, userInfo, successDelete, successCreate, createdProduct]);
   return (
     <>
+    <Meta title='SpurSoft|Products'/>
       <Row className='align-items-center'>
         <Col>
           <h1>Products</h1>

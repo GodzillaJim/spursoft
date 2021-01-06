@@ -4,6 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
+import Meta from '../components/Meta.js'
 import {} from '../actions/userActions.js';
 import { listOrders } from '../actions/orderActions.js';
 
@@ -23,6 +24,7 @@ const OrderListScreen = ({ history, match }) => {
   }, [dispatch, history, userInfo]);
   return (
     <>
+    <Meta title='SpurSoft | Orders' />
       <Row className='align-items-center'>
         <Col>
           <h1>Orders</h1>

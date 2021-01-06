@@ -4,6 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
+import Meta from '../components/Meta.js'
 import { getUserDetails, userUpdateProfile } from '../actions/userActions.js';
 import { listMyOrders } from '../actions/orderActions.js'
 
@@ -49,6 +50,7 @@ const ProfileScreen = ({ location, history }) => {
   };
   return (
     <Row>
+      <Meta  title = {user.name || 'SpurSoft|Profile'}/>
       <Col md={3}>
         <h2>USER PROFILE</h2>
         {message && <Message variant='danger'>{message}</Message>}

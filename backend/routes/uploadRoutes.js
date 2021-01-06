@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import multer from 'multer';
+import uploadFile from './uploadFileRoute.js'
 
 const router = express.Router();
 
@@ -35,7 +36,12 @@ const upload = multer({
 });
 
 router.post('/', upload.single('image'), (req, res) => {
+  console.log(req.file)
   res.send(`/${req.file.path}`);
 });
 
+router.post('/file', uploadFile.single('product'), (req, res) => {
+  console.log(JSON.stringify(req.body))
+  res.send(`/${req.file.path}`)
+})
 export default router;

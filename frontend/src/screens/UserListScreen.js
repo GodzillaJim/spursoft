@@ -4,6 +4,7 @@ import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
+import Meta from '../components/Meta.js'
 import { listUsers, deleteUser } from '../actions/userActions.js';
 
 const UserListScreen = ({ history }) => {
@@ -27,7 +28,7 @@ const UserListScreen = ({ history }) => {
     }
   }, [successDelete, dispatch, history, userInfo]);
   return (
-    <>
+    <><Meta title='SpurSoft|Users'/>
       <h1>Users</h1>
       {loading ? (
         <Loader />

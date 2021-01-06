@@ -84,6 +84,7 @@ const OrderDetailsScreen = ({ match, history }) => {
   ) : (
     <>
       <h1>Order: {order._id}</h1>
+      <Meta title='order._id'/>
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>

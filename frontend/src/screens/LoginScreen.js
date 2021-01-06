@@ -4,6 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
+import Meta from '../components/Meta.js'
 import FormContainer from '../components/FormContainer.js';
 import { login } from '../actions/userActions.js';
 
@@ -27,6 +28,7 @@ const LoginScreen = ({ location, history }) => {
   return (
     <FormContainer>
       <h1>Sign In</h1>
+      <Meta title='SpurSoft | Sign In'/>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>

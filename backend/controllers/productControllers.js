@@ -79,6 +79,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     brand,
     category,
     countInStock,
+    file
   } = req.body;
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -89,7 +90,9 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.brand = brand;
     product.category = category;
     product.countInStock = countInStock;
+    product.file = file
     const updatedProduct = await product.save();
+    console.log(updatedProduct)
     res.status(201).json(updatedProduct);
   } else {
     res.status(404);

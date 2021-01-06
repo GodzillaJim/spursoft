@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import CheckoutSteps from '../components/CheckoutSteps.js';
+import Meta from '../components/Meta.js'
 import { createOrder } from '../actions/orderActions.js';
 
 const PlaceOrderScreen = ({ history }) => {
@@ -42,6 +43,7 @@ const PlaceOrderScreen = ({ history }) => {
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 />
+      <Meta title='Place Order'/>
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>
