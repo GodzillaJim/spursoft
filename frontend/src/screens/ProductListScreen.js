@@ -7,12 +7,19 @@ import Loader from '../components/Loader.js';
 import {} from '../actions/userActions.js';
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions';
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants.js'
-
+import Paginate from '../components/Paginate.js'
 const ProductListScreen = ({ history, match }) => {
+  
+  const pageNumber = match.params.pageNumber
+
   const dispatch = useDispatch();
+
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  
+  const { loading, error, products, page, pages } = productList;
+  
   const userLogin = useSelector((state) => state.userLogin);
+  
   const { userInfo } = userLogin;
 
   const productDelete = useSelector((state) => state.productDelete);
@@ -48,9 +55,9 @@ const ProductListScreen = ({ history, match }) => {
     if(successCreate) {
       history.push(`/admin/product/${createdProduct._id}/edit`)
     } else {
-      dispatch(listProducts())
+      dispatch(listProducts('', pageNumber))
     }
-  }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct]);
+  }, [dispatch, pageNumber, history, userInfo, successDelete, successCreate, createdProduct]);
   return (
     <>
       <Row className='align-items-center'>
@@ -71,7 +78,7 @@ const ProductListScreen = ({ history, match }) => {
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
-      ) : (
+      ) : (<>
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
             <tr>
@@ -109,6 +116,8 @@ const ProductListScreen = ({ history, match }) => {
             ))}
           </tbody>
         </Table>
+        <Paginate pages={pages} page={page} isAdmin={true}/>
+        </>
       )}
     </>
   );

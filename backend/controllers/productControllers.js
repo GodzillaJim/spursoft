@@ -4,14 +4,22 @@ import Product from '../models/productModel.js';
 // @route GET /api/products
 // @access public
 const getProducts = asyncHandler(async (req, res) => {
-  const keyword = req.query.keyword ? {
-    name: {
-      $regex: req.query.keyword,
-      $options: 'i'
-    }
-  } : {}
-  const products = await Product.find( {...keyword} );
-  res.json(products);
+  const pageSize = 15;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
+  const count = await Product.countDocuments();
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc Fetch one products
@@ -116,8 +124,8 @@ const createProductReview = asyncHandler(async (req, res) => {
     product.rating =
       product.reviews.reduce((acc, item) => item.rating + acc, 0) /
       product.reviews.length;
-    await product.save()
-    res.status(201).json({ message: 'Review added'})
+    await product.save();
+    res.status(201).json({ message: 'Review added' });
   } else {
     res.status(404);
     throw new Error('Product not found');
