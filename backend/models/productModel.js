@@ -28,6 +28,10 @@ const productSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     },
+    file: {
+        type: String,
+        default: './data/sample.zip',
+    },
     name: {
         type: String,
         required: true
