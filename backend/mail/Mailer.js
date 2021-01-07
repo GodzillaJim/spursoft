@@ -1,12 +1,6 @@
 import nodemailer from 'nodemailer';
 import Mailgen from 'mailgen';
 
-const user = { name: 'Jane Doe', shippingEmail: 'jimnam99@gmail.com' };
-const product = {
-  name: 'Adobe Photoshop 6',
-  description: 'Multimedia tool for creating, editing and polishing photos',
-  price: '300',
-};
 const sendMail = async (user, product) => {
   const message = (user, product) => {
     const mailGenerator = new Mailgen({
@@ -55,15 +49,15 @@ const sendMail = async (user, product) => {
     return messageContent;
   };
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
+    service: process.env.MAIL_SERVICE,
+    host: process.env.MAIL_HOST,
     auth: {
-      user: 'spursoft.test@gmail.com',
-      pass: 'williamshakespeare22',
+      user: process.env.MAIL_USERNAME,
+      pass: process.env.MAIL_PASSWORD,
     },
   });
   const mailOptions = {
-    from: 'spursoft.test@gmail.com',
+    from: process.env.MAIL_USERNAME,
     to: user.shippingEmail,
     subject: product.name,
     html: message(user, product),
