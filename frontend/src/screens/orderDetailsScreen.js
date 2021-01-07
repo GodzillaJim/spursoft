@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
+import Meta from '../components/Meta.js'
 import {
   getOrderDetails,
   payOrder,
@@ -21,6 +22,7 @@ const OrderDetailsScreen = ({ match, history }) => {
   const dispatch = useDispatch();
 
   const [sdkReady, setSdkReady] = useState(false);
+  const [loadState, setLoadState] = useState({ loading: false, loaded: false,})
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
@@ -42,13 +44,15 @@ const OrderDetailsScreen = ({ match, history }) => {
       history.push('/login');
     }
     const addPayPalScript = async () => {
+      setLoadState({ loading: true, loaded: false })
       const { data: clientId } = await axios.get('/api/config/paypal');
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
       script.async = true;
       script.onload = () => {
-        setSdkReady(true);
+        // setSdkReady(true);
+        setLoadState({ loading:false,loaded: true})
       };
       document.body.appendChild(script);
     };
@@ -57,22 +61,11 @@ const OrderDetailsScreen = ({ match, history }) => {
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
-      if (!window.paypal) {
+      if (!loadState.loading && !loadState.loaded) {
         addPayPalScript();
-      } else {
-        setSdkReady(true);
       }
     }
-  }, [
-    dispatch,
-    orderId,
-    order,
-    successPay,
-    history,
-    orderDetails,
-    successDeliver,
-    userInfo,
-  ]);
+  }, [dispatch, orderId, order, successPay, history, orderDetails, successDeliver, userInfo, loadState.loading, loadState.loaded]);
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
@@ -84,7 +77,7 @@ const OrderDetailsScreen = ({ match, history }) => {
   ) : (
     <>
       <h1>Order: {order._id}</h1>
-      <Meta title='order._id'/>
+      <Meta title={order._id}/>
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>
@@ -175,7 +168,7 @@ const OrderDetailsScreen = ({ match, history }) => {
               {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
-                  {!sdkReady ? (
+                  {loadState.loading || !loadState.loaded ? (
                     <Loader />
                   ) : (
                     <PayPalButton

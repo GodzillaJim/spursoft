@@ -37,7 +37,7 @@ const RegisterScreen = ({ location, history }) => {
     }
     return (
         <FormContainer>
-            <Meta title='Sign Up'/>
+            <Meta title='SpurSoft | Sign Up'/>
             <h1>Sign Up</h1>
             {message && <Message variant='danger'>{ message }</Message>}
             {error && <Message variant='danger'>{error}</Message>}

@@ -41,7 +41,6 @@ router.post('/', upload.single('image'), (req, res) => {
 });
 
 router.post('/file', uploadFile.single('product'), (req, res) => {
-  console.log(JSON.stringify(req.body))
   res.send(`/${req.file.path}`)
 })
 export default router;
