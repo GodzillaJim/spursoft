@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
+import sendOrder from '../orders/FulfillOrder.js'
 
 // @desc Create new order
 // @route POST /api/orders
@@ -64,6 +65,9 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
       update_time: req.body.update_time,
       email_address: req.body.payer.email_address,
     };
+    sendOrder(order)
+    order.isDelivered = true
+    order.deliveredAt = Date.now()
     const updatedOrder = await order.save();
     res.json(updatedOrder);
   }
