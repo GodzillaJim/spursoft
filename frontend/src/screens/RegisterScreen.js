@@ -49,7 +49,7 @@ const RegisterScreen = ({ location, history }) => {
                     <Form.Control type='name' onChange = {(e) => setName(e.target.value)} value ={name} placeholder ='Enter your name'/>
                 </Form.Group>
                 <Form.Group controlId = 'email'>
-                    <Form.Label>Email Address</Form.Label>
+                    <Form.Label>Email Address</Form.Label> 
                     <Form.Control type='email' onChange = {(e) => setEmail(e.target.value)} value ={email} placeholder ='Enter email'/>
                 </Form.Group>
                 <Form.Group controlId = 'password'>
@@ -66,7 +66,7 @@ const RegisterScreen = ({ location, history }) => {
             </Form>
             <Row>
                 <Col>
-                    Have an Account ? <Link to = { redirect ? `/login?redirect=${redirect}`: '/login'}>Login Here</Link>
+                    Have an Account ? <Link to = { redirect ? `/login?redirect=/${redirect}`: '/login'}>Login Here</Link>
                 </Col>
             </Row>
         </FormContainer>

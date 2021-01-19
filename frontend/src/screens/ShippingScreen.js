@@ -22,6 +22,7 @@ const ShippingScreen = ({ history }) => {
       <Meta title='Shipping'/>
       <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
+      <small>Enter your email address, where you want us to drop your products.</small>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='address'>
           <Form.Label>Email Address</Form.Label>

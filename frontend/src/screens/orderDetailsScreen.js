@@ -21,7 +21,6 @@ const OrderDetailsScreen = ({ match, history }) => {
   const orderId = match.params.id;
   const dispatch = useDispatch();
 
-  const [sdkReady, setSdkReady] = useState(false);
   const [loadState, setLoadState] = useState({ loading: false, loaded: false,})
 
   const orderDetails = useSelector((state) => state.orderDetails);
