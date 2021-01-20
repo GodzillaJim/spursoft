@@ -7,9 +7,8 @@ frontend/node_modules
 .pnp.js
 
 # files
-frontend/public/images
-files
-uploads
+frontend/build
+
 # testing
 /coverage
 
