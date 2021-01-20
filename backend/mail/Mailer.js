@@ -1,5 +1,8 @@
 import nodemailer from 'nodemailer';
 import Mailgen from 'mailgen';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const sendMail = async (user, product) => {
   const message = (user, product) => {
@@ -38,7 +41,7 @@ const sendMail = async (user, product) => {
             button: {
               color: '#364896',
               text: `Review`,
-              link: `http://localhost:3000/${product._id}`,
+              link: `${process.env.HOST}${product._id}`,
             },
           },
           outro: 'Need help, or have questions? Just reply to this email.',
