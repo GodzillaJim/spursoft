@@ -85,6 +85,7 @@ const OrderDetailsScreen = ({ match, history }) => {
               <p>{order.shippingAddress}</p>
               {order.isDelivered ? (
                 <Message variant='success'>
+                  We have dispatched your products to the email above. Allow up to 10 minutes to receive the products.
                   Delivered on {order.deliveredAt}
                 </Message>
               ) : (
