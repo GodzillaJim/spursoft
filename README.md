@@ -1,5 +1,5 @@
 # SpurSoft
-
+See this project live at http://spursoft-app.herokuapp.com
 ## Introduction
 
 This project is being undertaken in fulfilment of the requirements of INF 470E, Software Engineering course. SPURSOFT is an online software shop where internet users can purchase system
